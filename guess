@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+
+
+namespace snakegame
+{
+    class Program
+    {
+     
+      
+        static void Main(string[] args)
+        {
+            int low = 0;
+            int high = 100;
+            bool yesno = false;
+            Random rand = new Random();
+            int random = rand.Next(100);
+            start:
+            Console.WriteLine("think of a number between 1 and 100");
+            Console.WriteLine("is your number " + random +" yes or no");
+          tryagain:
+
+            switch (Console.ReadLine())
+            {
+                case "yes":
+                    Console.WriteLine("nice");
+                    yesno = true;
+                    break;
+                case "no":
+                    Console.WriteLine("aw man");
+                    yesno = false;
+                    break;
+                default:
+             
+                    Console.WriteLine("what?");
+                    goto tryagain;
+                    break;
+            }
+            if(yesno == false)
+            {
+                Console.WriteLine("is your number higher or lower");
+                again:
+                switch (Console.ReadLine())
+                {
+                    case "higher":
+                        low = random;
+                        random = rand.Next(random, high-1);
+                       
+                        yesno = true;
+                        break;
+                    case "lower":
+                        high = random;
+                        random = rand.Next(low+1, random);
+                        
+                        yesno = false;
+                        break;
+                    default:
+                        Console.WriteLine("what?");
+                        goto again;
+                        break;
+                }
+                goto start;
+            }
+        }
+    }
+}
